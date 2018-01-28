@@ -1,4 +1,4 @@
-package com.digistratum.microhost.Config;
+package com.digistratum.Config;
 
 public interface Config {
 
