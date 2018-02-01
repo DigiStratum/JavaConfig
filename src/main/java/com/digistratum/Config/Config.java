@@ -27,13 +27,32 @@ public interface Config {
 	Boolean get(String name, Boolean def);
 
 	/**
-	 * Set the named config entry to the supplied value
-	 *
-	 * Note that this is used to supplement the configuration data internally; it is not intended, nor makes any effort,
-	 * to store updated configuration data so that it may be reloaded later.
+	 * Set the named config entry to the supplied String value
 	 *
 	 * @param name String name of the config entry we want to set
 	 * @param value String value we want to set it to
+	 *
+	 * @return this for chaining...
 	 */
-	void set(String name, String value);
+	Config set(String name, String value);
+
+	/**
+	 * Set the named config entry to the supplied Boolean value
+	 *
+	 * @param name String name of the config entry we want to set
+	 * @param value Boolean value we want to set it to
+	 *
+	 * @return this for chaining...
+	 */
+	Config set(String name, Boolean value);
+
+	/**
+	 * Set the named config entry to the supplied Integer value
+	 *
+	 * @param name String name of the config entry we want to set
+	 * @param value Integer value we want to set it to
+	 *
+	 * @return this for chaining...
+	 */
+	Config set(String name, Integer value);
 }

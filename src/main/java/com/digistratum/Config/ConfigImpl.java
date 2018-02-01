@@ -58,21 +58,55 @@ public class ConfigImpl implements Config {
 
 	@Override
 	public String get(String name, String def) {
-		return (config.containsKey(name)) ? config.get(name) : def;
+		if (! config.containsKey(name)) return def;
+		String value = config.get(name);
+		return (null == value) ? def : value;
 	}
 
 	@Override
 	public Boolean get(String name, Boolean def) {
-		return (config.containsKey(name)) ? Boolean.parseBoolean(config.get(name)) : def;
+		if (! config.containsKey(name)) return def;
+		String value = config.get(name);
+		return (null == value) ? def : Boolean.parseBoolean(value);
 	}
 
 	@Override
 	public Integer get(String name, Integer def) {
-		return (config.containsKey(name)) ? Integer.parseInt(config.get(name)) : def;
+		if (! config.containsKey(name)) return def;
+		String value = config.get(name);
+		return (null == value) ? def : Integer.parseInt(value);
 	}
 
 	@Override
-	public void set(String name, String value) {
-		config.put(name, value);
+	public ConfigImpl set(String name, String value) {
+		if (null == value) {
+			config.put(name, null);
+		}
+		else {
+			config.put(name, value);
+		}
+		return this;
+	}
+
+	@Override
+	public ConfigImpl set(String name, Boolean value) {
+		if (null == value) {
+			config.put(name, null);
+		}
+		else {
+			config.put(name, (value ? "true" : "false"));
+		}
+		return this;
+	}
+
+	@Override
+	public ConfigImpl set(String name, Integer value) {
+		if (null == value) {
+			config.put(name, null);
+		}
+		else {
+			config.put(name, "" + value);
+		}
+		return this;
 	}
 }
