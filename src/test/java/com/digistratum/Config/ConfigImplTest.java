@@ -1,11 +1,13 @@
 package com.digistratum.Config;
 
+import com.digistratum.Config.Exception.ConfigException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.net.URL;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ConfigImplTest {
@@ -175,5 +177,19 @@ public class ConfigImplTest {
 		Integer intExpected = 111;
 		assertTrue(intExpected.equals(sut.get("intProp", 333)));
 		assertEquals(true, sut.get("boolProp", false));
+	}
+
+	@Test
+	public void testThat_altConstructor_throwsExceptionForMissingPropsFile() {
+
+		// Verify
+		assertThrows(
+				ConfigException.class,
+				() -> {
+
+					// Attempt
+					new ConfigImpl("nosuchpath");
+				}
+		);
 	}
 }

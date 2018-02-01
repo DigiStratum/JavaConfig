@@ -1,5 +1,7 @@
 package com.digistratum.Config;
 
+import com.digistratum.Config.Exception.ConfigException;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -44,9 +46,9 @@ public class ConfigImpl implements Config {
 			// load a properties file
 			prop.load(input);
 		} catch (FileNotFoundException e) {
-			System.out.println("Missing properties file: '" + path + "'");
+			throw new ConfigException("Missing properties file: '" + path + "'");
 		} catch (IOException e) {
-			System.out.println("Error reading properties file: '" + path + "' - " + e.getMessage());
+			throw new ConfigException("Error reading properties file: '" + path + "' - " + e.getMessage());
 		}
 
 		// Move our props into a Map<String, String> for config
